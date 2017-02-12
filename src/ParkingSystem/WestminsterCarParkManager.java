@@ -38,6 +38,104 @@ public class WestminsterCarParkManager implements CarParkManager, Serializable {
 
         System.out.print("\nChoose a character for proceed: ");
         char option = sc.next().toLowerCase().charAt(0);//store character in option variable
+switch (option) {
+            case 'a':
+                addVehicle();
+                break;
 
+            case 'd':
+                deleteVehicle();
+                break;
+
+            case 'l':
+                printParkedVehicles();
+                System.out.println();
+                System.out.println();
+                process();
+                break;
+
+            case 'p':
+                 percentageVehicleParked();
+
+                System.out.println();
+                process();
+                break;
+
+
+            case 't':
+                Vehicle lVehicle = getLongestParkingVehicle();
+                  //check vehicles are in the park
+                if(lVehicle != null){
+                    System.out.println();
+                    System.out.print("Vehicle with longest parking time : ");
+                    System.out.println(lVehicle);
+                }
+                else{
+                    System.out.println("No vehicles in the park");
+                }
+                System.out.println();
+                System.out.println();
+                //back to menu
+                process();
+                break;
+
+            case 's':
+                Vehicle sVehicle = getShortestParkingVehicle();
+
+                if(sVehicle != null){
+                    System.out.println();
+                    System.out.print("Last vehicle parked : ");
+                    System.out.println(sVehicle);
+                }
+                else{
+                    System.out.println("No vehicles in the park");
+                }
+                System.out.println();
+                System.out.println();
+                process();
+                break;
+
+            case 'f':
+            	//search deleted vehicles by entrance date 
+                findVehicleFromHistory();
+                System.out.println();
+                System.out.println();
+                process();
+                break;
+
+            case 'r':
+                calculateParkCharges();
+                System.out.println();
+                System.out.println();
+                process();
+                break;
+            
+            case 'w':
+            	//write to the file
+            	Writter();
+                process();
+
+               break;
+               
+            case 'y':
+              //read to the file 
+            	reader();
+                process();
+
+        	  break;
+               
+           case 'q':
+                //exit from the system
+              System.exit(0);
+
+          	  break;
+          	  
+            default:
+                System.out.println("Please input valid character");
+                process();
+                break;
+
+        }
+    }
              }
     }
