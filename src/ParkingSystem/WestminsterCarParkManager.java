@@ -48,20 +48,20 @@ switch (option) {
                 break;
 
             case 'l':
-              //  printParkedVehicles();
+               printParkedVehicles();
                 
                 break;
 
             case 'p':
-                 //percentageVehicleParked();
+                 percentageVehicleParked();
 
                 
                 break;
 
 
             case 't':
-                //Vehicle lVehicle = getLongestParkingVehicle();
-                  //check vehicles are in the park
+                Vehicle lVehicle = getLongestParkingVehicle();
+                  check vehicles are in the park
                 
                 break;
 
@@ -378,6 +378,118 @@ switch (option) {
            
     process();
     	}
+
+    @Override
+    public void printParkedVehicles() {
+         int count=0;
+        for(Slot s: slot){
+            if(s != null && s.getSlotId()!=0){
+            	count++;
+                System.out.println(s.getVehicle());
+                char character=s.getVehicle().getVType();
+                switch(character){
+                
+                      case 'c':
+                        System.out.println("vehicle type is a CAR");
+                      break;
+                    
+                     case 'v':
+                       System.out.println("vehicle type is a Van");
+                      break;
+                    
+                    case 'm':
+                       System.out.println("vehicle type is a motorbike");
+                      break;  
+                    
+                    
+                }
+            }
+        }
+     
+
+    }
+
+    @Override
+    public int checkFreeParkingSlots(boolean isVan) {
+
+        ArrayList<Integer> freeSlots = new ArrayList<Integer>();
+
+        for(int i=0; i < 20; i++){
+            if(!isVan){
+                if(slot[i] == null){
+                    freeSlots.add(i+1);
+                }
+            }
+            else {
+                if(slot[i] == null){
+                    if(i < 19){
+                        if(slot[i+1] == null){
+
+                            freeSlots.add(i+1);
+                        }
+                    }
+                }
+            }
+        }
+
+        if(freeSlots.isEmpty()){
+            System.out.println("No free slots available, Car Park Full");
+            return 0;
+        }
+        else {
+            System.out.print("Free Slots : ");
+            System.out.println(Arrays.toString(freeSlots.toArray()));
+            return getFreeParkingSlotId(freeSlots, isVan);
+        }
+    }
+
+    @Override
+    public void percentageVehicleParked() {
+    	
+        //int numVehicles = 0;
+    	double total=0;
+        double countc=0;
+        double countv=0;
+        double countm=0;
+        boolean skip=false;
+       
+        
+        for(Slot s: slot){
+        	if(skip){
+        		skip=false;
+        		continue;
+        	}
+        if(s!=null){
+          	if(s.getVehicle().getVType()=='c'){
+        	   countc++;
+        	}else if(s.getVehicle().getVType()=='v'){
+        		
+        		countv++;
+        		skip=true;
+        	}else{
+        		countm++;
+        	}
+        }
+        }
+   
+        total=countc+countv+countm;
+
+        if(total!=0){
+        double carPercentage=(double)(countc/total)*100;
+        double vanPercentage=(double)(countv/total)*100;
+        double motorbikePercentage=(double)(countm/total)*100;
+        System.out.println("Percentage of cars parked : "+carPercentage+"%");
+        System.out.println("Percentage of vans parked : "+vanPercentage+"%");
+        System.out.println("Percentage of motorbike parked : "+motorbikePercentage+"%");
+        }else{
+        	System.out.println("no vehicles in the system");
+        
+    	}
+
+      /*  System.out.print("Percentage of vehicles parked : ");
+        double percentage = ((double) numVehicles/20)*100;*/
+       
+    }
     
              
     }
