@@ -1,7 +1,8 @@
 package ParkingSystem;
 
+import java.io.Serializable;
 
-public class Slot {
+public class Slot implements Serializable{
 
     private int slotId;
     private Vehicle vehicle;

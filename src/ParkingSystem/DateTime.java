@@ -1,9 +1,10 @@
 package ParkingSystem;
 
+import java.io.Serializable;
 
+public class DateTime implements Serializable{
 
-public class DateTime {
-private int year;
+    private int year;
     private int month;
     private int date;
     private int hours;
@@ -60,5 +61,79 @@ private int year;
             return false;
         }
     }
-    
+
+    public boolean checkHour(int hour){
+
+        if(hour > 0 && hour < 25){
+            return true;
+        }
+
+        else{
+        	if(countH>0){
+            	System.out.println("invalid hour");
+            	}
+            	countH++;
+            return false;
+        }
+    }
+
+    public boolean checkMinites(int minite){
+
+        if(minite > 0 && minite < 60){
+            return true;
+        }
+
+        else{
+        	if(countMin>0){
+            	System.out.println("invalid Minutes");
+            	}
+            	countMin++;            
+            	return false;
+        }
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+    public int getMinites() {
+        return minites;
+    }
+
+    public void setMinites(int minites) {
+        this.minites = minites;
+    }
+
+    @Override
+    public String toString() {
+        return year + "-" + month +"-"+ date + " " + hours + ":" + minites;
+    }
 }
